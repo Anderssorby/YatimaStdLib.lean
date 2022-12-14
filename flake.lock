@@ -30,41 +30,61 @@
         "type": "github"
       }
     },
+    "flake-utils_3": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "lean": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "lean-stage0": "lean-stage0",
         "lean4-mode": "lean4-mode",
         "nix": "nix",
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1659891095,
-        "narHash": "sha256-cKDC4HuOPKad7Hj3+xqXvOmX5JRtZ5kuykQJ+RqBk1c=",
+        "lastModified": 1671036206,
+        "narHash": "sha256-zX8UXDtbt+DNwC9QIGkRpRDvi5tZq9n2C3/uGFa4W+A=",
         "owner": "leanprover",
         "repo": "lean4",
-        "rev": "578adcd7f047c4879f144614a114fb212916bd40",
+        "rev": "52d00e8944f5afc8fa1b4066ae30065a8682eb82",
         "type": "github"
       },
       "original": {
         "owner": "leanprover",
-        "ref": "v4.0.0-m5",
         "repo": "lean4",
         "type": "github"
       }
     },
-    "lean-stage0": {
+    "lean-std": {
+      "inputs": {
+        "flake-utils": "flake-utils_3",
+        "lean": [
+          "lean"
+        ],
+        "nixpkgs": "nixpkgs_3"
+      },
       "locked": {
-        "lastModified": 0,
-        "narHash": "sha256-3K/43lSW4WIHNG+HHVKCD1odS63mHuaQ4ueHyTIkcls=",
-        "owner": "leanprover",
-        "repo": "lean4",
-        "rev": "0000000000000000000000000000000000000000",
+        "lastModified": 1671025729,
+        "narHash": "sha256-n5b0HuGa6r5JzrN7iJ2jVFPthhGW5+cTAev72v437+g=",
+        "owner": "Anderssorby",
+        "repo": "std4",
+        "rev": "0b3b2bd2e33e16293bdfe7a5061bf52a04486675",
         "type": "github"
       },
       "original": {
-        "owner": "leanprover",
-        "repo": "lean4",
+        "owner": "Anderssorby",
+        "repo": "std4",
         "type": "github"
       }
     },
@@ -170,6 +190,22 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1670929434,
+        "narHash": "sha256-n5UBO6XBV4h3TB7FYu2yAuNQMEYOrQyKeODUwKe06ow=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "1710ed1f6f8ceb75cf7d1cf55ee0cc21760e1c7a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1661361016,
         "narHash": "sha256-Bjf6ZDnDc6glTwIIItvwfcaeJ5zWFM6GYfPajSArdUY=",
         "owner": "NixOS",
@@ -187,7 +223,8 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "lean": "lean",
-        "nixpkgs": "nixpkgs_3"
+        "lean-std": "lean-std",
+        "nixpkgs": "nixpkgs_4"
       }
     }
   },

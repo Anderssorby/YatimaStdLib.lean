@@ -1,16 +1,19 @@
 {
   inputs = {
     lean = {
-      url = "github:leanprover/lean4/v4.0.0-m5";
+      url = "github:leanprover/lean4";
     };
     nixpkgs.url = "nixpkgs/nixos-unstable";
     flake-utils = {
       url = "github:numtide/flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    lean-std = {
+      url = "github:Anderssorby/std4";
+      inputs.lean.follows = "lean";
     };
   };
 
-  outputs = { self, lean, flake-utils, nixpkgs }:
+  outputs = { self, lean, flake-utils, nixpkgs, lean-std }:
     let
       supportedSystems = [
         "aarch64-linux"
@@ -28,7 +31,7 @@
         name = "YatimaStdLib";  # must match the name of the top-level .lean file
         project = leanPkgs.buildLeanPackage {
           inherit name;
-          # deps = [ lean-ipld.project.${system} ];
+          deps = [ lean-std.project.${system} ];
           # Where the lean files are located
           src = ./.;
         };
@@ -40,13 +43,20 @@
         };
 
         defaultPackage = self.packages.${system}.${name};
-        devShell = pkgs.mkShell {
-          inputsFrom = [ project.executable ];
-          buildInputs = with pkgs; [
-            leanPkgs.lean-dev
-          ];
-          LEAN_PATH = "./src:./test";
-          LEAN_SRC_PATH = "./src:./test";
+        devShells = {
+          lean-dev = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              leanPkgs.lean-dev
+            ];
+            LEAN_PATH = "./src:./test";
+            LEAN_SRC_PATH = "./src:./test";
+          };
+          elan = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              elan
+            ];
+          };
+          default = self.devShells.${system}.elan;
         };
       });
 }
